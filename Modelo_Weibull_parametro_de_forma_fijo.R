@@ -1,7 +1,7 @@
 library(tidyverse)
 library(paletteer)
 
-#Par??metro de escala variable (lambda) y parametro de forma fijo (p = 2.2)
+#Parámetro de escala variable (lambda) y parámetro de forma fijo (p = 2.2)
 t <- seq(0,3,0.1)
 
 # lambda = 3.5
@@ -35,7 +35,7 @@ h_5FIJA <-Vectorize(h_5)
 S_5FIJA <- Vectorize(S_5)
 
 
-#Grafica de las funciones de riesgo
+#Gráfica de las funciones de riesgo
 ggplot(data =tibble(lims = t), aes(x=t))+
   theme(panel.background = element_rect(fill = 'white'),
         panel.border = element_rect(color = "black", fill=NA, size = 1.5),
@@ -53,12 +53,12 @@ ggplot(data =tibble(lims = t), aes(x=t))+
   stat_function(fun = h_3FIJA, aes(color='l2'), size=1.5)+
   stat_function(fun = h_4FIJA, aes(color='l3'), size=1.5)+
   stat_function(fun = h_5FIJA, aes(color='l4'), size=1.5)+
-  scale_colour_manual('       Par??metros',values = c('l0' = '#EF6F6A','l1' ='#6388B4FF','l2' ='#BD263E','l3' ='#55AD89','l4' = '#FFAE34'),
+  scale_colour_manual('       Parámetros',values = c('l0' = '#EF6F6A','l1' ='#6388B4FF','l2' ='#BD263E','l3' ='#55AD89','l4' = '#FFAE34'),
                       labels = c( expression("  "*lambda*" = 3.5   p = 2.2 "), expression(" "*lambda*" = 2.0   p = 2.2 "), expression(" "*lambda*" = 1.0   p = 2.2 "),
                                   expression("  "*lambda*" = 0.5   p = 2.2 "), expression(" "*lambda*" = 0.3   p = 2.2 ")))
 
 
-#Grafica de las funciones de supervivencia
+#Gráfica de las funciones de supervivencia
 ggplot(data =tibble(lims = t), aes(x=t))+
   theme(panel.background = element_rect(fill = 'white'),
         panel.border = element_rect(color = "black", fill=NA, size = 1.5),
@@ -76,7 +76,7 @@ ggplot(data =tibble(lims = t), aes(x=t))+
   stat_function(fun = S_3FIJA, aes(color='l2'), size=1.5)+
   stat_function(fun = S_4FIJA, aes(color='l3'), size=1.5)+
   stat_function(fun = S_5FIJA, aes(color='l4'), size=1.5)+
-  scale_colour_manual('       Par??metros',values = c('l0' = '#EF6F6A','l1' ='#6388B4FF','l2' ='#BD263E','l3' ='#55AD89','l4' = '#FFAE34'),
+  scale_colour_manual('       Parámetros',values = c('l0' = '#EF6F6A','l1' ='#6388B4FF','l2' ='#BD263E','l3' ='#55AD89','l4' = '#FFAE34'),
                       labels = c( expression("  "*lambda*" = 3.5   p = 2.2 "), expression(" "*lambda*" = 2.0   p = 2.2 "), expression(" "*lambda*" = 1.0   p = 2.2 "),
                                   expression("  "*lambda*" = 0.5   p = 2.2 "), expression(" "*lambda*" = 0.3   p = 2.2 ")))
 
