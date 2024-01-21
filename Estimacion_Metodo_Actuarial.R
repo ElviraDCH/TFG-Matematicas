@@ -17,7 +17,7 @@ cy <-c(0.679,0.515,0.312,0.312,0.211)
 df <- data.frame(dx=t, dy=S)
 dp <-data.frame(dx1=cx,dy1 =cy)
 
-#Representación
+#Representación de la función de supervivencia estimada mediante el método actuarial 
 ggplot()+
   geom_step(data = df,aes(x=dx, y=dy, color='0',linetype = '0', shape= '0'),stroke=NA,size=1.2)+
   geom_point(data = dp,aes(x=dx1, y=dy1, color='1',linetype = '1', shape = '1'),stroke= 1.2,size =1.7)+
