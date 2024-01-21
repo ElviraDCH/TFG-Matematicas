@@ -3,16 +3,16 @@ library(KMsurv)
 library(paletteer)
 
 
-# Datos de los pacientes de veteran que han recibido el tratamiento estandar
+# Datos de los pacientes de veteran que han recibido el tratamiento estándar
 Grupo_1 <-veteran[veteran$trt!='2',] 
 
-#Surv combina informaci??n sobre el tiempo y la censura de los pacientes
+#Surv combina información sobre el tiempo y la censura de los pacientes
 Grupo1.surv <-Surv(Grupo_1$time,Grupo_1$status)
 
-#survfit calcula las curvas de supervivencia seg??n el estimador de Kaplan-Meier
+#survfit calcula las curvas de supervivencia según el estimador elegido, en este caso el de Kaplan-Meier
 Grupo1.km <-survfit(Grupo1.surv ~ 1, data = Grupo_1, type ="kaplan-meier")
 
-#Tabla resumen de la estimaci??n de la funci??n de supervivencia (S)
+#Tabla resumen de la estimación de la función de supervivencia (S)
 summary(Grupo1.km)
 
 #Valores de los tiempos censurados
@@ -24,7 +24,7 @@ df <-data.frame(dx =Grupo1.km$time, dy = Grupo1.km$surv)
 dc <-data.frame(dx1 =censuras_tiempo, dy1 =censuras_KM )
 IC1 <-data.frame(d1 = Grupo1.km$time, d2 =Grupo1.km$upper, d4 =Grupo1.km$lower)
 
-#Gr??fica de la funci??n de supervivencia mediante el metodo de Kaplan-Meier
+#Gráfica de la función de supervivencia mediante el método de Kaplan-Meier
 ggplot()+
   geom_step(data = df,aes(x=dx, y=dy, color='1',linetype = '1', shape= '1', fill = '1'),stroke=NA,size=1.1)+
   geom_point(data = dc,aes(x=dx1, y=dy1, color='2',linetype = '2', shape = '2', fill= '2'),stroke= 1.2,size =1.5)+
@@ -40,13 +40,13 @@ ggplot()+
         legend.text = element_text(size=18),
         legend.title = element_blank(),                               
         legend.spacing.y = unit(0.01, 'cm'))+
-  labs(x='Tiempo en d??as', y='Probabilidad de supervivencia')+ 
+  labs(x='Tiempo en días', y='Probabilidad de supervivencia')+ 
   scale_colour_manual(' ',values = c('0'='#A3123A','1' = '#BD263E','2' = 'black'),
-                      labels = c("Intervalo de confianza","Estimaci??n Kaplan-Meier", "Observaciones censuradas"))+
+                      labels = c("Intervalo de confianza","Estimación Kaplan-Meier", "Observaciones censuradas"))+
   scale_linetype_manual(' ', values = c('0'=NA,'1'='solid', '2'= NA),
-                        labels = c("Intervalo de confianza","Estimaci??n Kaplan-Meier", "Observaciones censuradas"))+
+                        labels = c("Intervalo de confianza","Estimación Kaplan-Meier", "Observaciones censuradas"))+
   scale_shape_manual(' ', values = c('0'=NA, '1'= NA, '2'= 3),
-                     labels = c("Intervalo de confianza","Estimaci??n Kaplan-Meier", "Observaciones censuradas"))+
+                     labels = c("Intervalo de confianza","Estimación Kaplan-Meier", "Observaciones censuradas"))+
   scale_fill_manual(' ', values = c('0'='#A3123A', '1'= 'white', '2'= 'white'),
-                    labels = c("Intervalo de confianza","Estimaci??n Kaplan-Meier", "Observaciones censuradas"))
+                    labels = c("Intervalo de confianza","Estimación Kaplan-Meier", "Observaciones censuradas"))
  
