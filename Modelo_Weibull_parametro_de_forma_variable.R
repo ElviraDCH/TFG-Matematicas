@@ -1,7 +1,7 @@
 library(tidyverse)
 library(paletteer)
 
-#Par??metro de escala fijo (lambda) y parametro de forma variable (p)
+#Parámetro de escala fijo (lambda) y parámetro de forma variable (p)
 t <- seq(0,3,0.1)
 lambda <- 0.7 
 
@@ -38,7 +38,7 @@ h4_FIJA <-Vectorize(h4)
 S4_FIJA <- Vectorize(S4)
 
 
-#Grafica de las funciones de riesgo
+#Gráfica de las funciones de riesgo
 ggplot(data =tibble(lims = t), aes(x=t))+
   theme(panel.background = element_rect(fill = 'white'),
         panel.border = element_rect(color = "black", fill=NA, size = 1.5),
@@ -56,12 +56,12 @@ ggplot(data =tibble(lims = t), aes(x=t))+
   stat_function(fun = h2_FIJA, aes(color='2'), size = 1.5)+
   stat_function(fun = h3_FIJA, aes(color='3'), size =1.5)+
   stat_function(fun = h4_FIJA, aes(color='4'), size =1.5)+
-  scale_colour_manual('       Parametros',values = c('0' = '#EF6F6A','1' ='#6388B4FF','2' ='#BD263E','3' ='#55AD89','4' = '#FFAE34'),
+  scale_colour_manual('       Parámetros',values = c('0' = '#EF6F6A','1' ='#6388B4FF','2' ='#BD263E','3' ='#55AD89','4' = '#FFAE34'),
                       labels = c( expression("  "*lambda*" = 0.7   p = 2.2 "), expression(" "*lambda*" = 0.7   p = 1.5 "), expression(" "*lambda*" = 0.7   p = 1.0 "),
                                   expression("  "*lambda*" = 0.7   p = 0.5 "), expression(" "*lambda*" = 0.7   p = 0.2 ")))
 
 
-#Grafica de las funciones de supervivencia
+#Gráfica de las funciones de supervivencia
 ggplot(data =tibble(lims = t), aes(x=t))+
   theme(panel.background = element_rect(fill = 'white'),
         panel.border = element_rect(color = "black", fill=NA, size = 1.5),
@@ -79,6 +79,6 @@ ggplot(data =tibble(lims = t), aes(x=t))+
   stat_function(fun = S2_FIJA, aes(color='2'), size=1.5)+
   stat_function(fun = S3_FIJA, aes(color='3'), size=1.5)+
   stat_function(fun = S4_FIJA, aes(color='4'), size=1.5)+
-  scale_colour_manual('       Parametros',values = c('0' = '#EF6F6A','1' ='#6388B4FF','2' ='#BD263E','3' ='#55AD89','4' = '#FFAE34'),
+  scale_colour_manual('       Parámetros',values = c('0' = '#EF6F6A','1' ='#6388B4FF','2' ='#BD263E','3' ='#55AD89','4' = '#FFAE34'),
                       labels = c( expression("  "*lambda*" = 0.7   p = 2.2 "), expression(" "*lambda*" = 0.7   p = 1.5 "), expression(" "*lambda*" = 0.7   p = 1.0 "),
                                   expression("  "*lambda*" = 0.7   p = 0.5 "), expression(" "*lambda*" = 0.7   p = 0.2 ")))
