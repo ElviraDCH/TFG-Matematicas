@@ -26,9 +26,9 @@ IC1 <-data.frame(d1 = Grupo1.km$time, d2 =Grupo1.km$upper, d4 =Grupo1.km$lower)
 
 #Gráfica de la función de supervivencia mediante el método de Kaplan-Meier
 ggplot()+
+  geom_ribbon(data =IC1, aes(x=d1,ymin = d4,ymax =d2,color = '0',linetype = '0', shape = '0', fill = '0'),stroke= NA,size =1.5, alpha = 0.1)+
   geom_step(data = df,aes(x=dx, y=dy, color='1',linetype = '1', shape= '1', fill = '1'),stroke=NA,size=1.1)+
   geom_point(data = dc,aes(x=dx1, y=dy1, color='2',linetype = '2', shape = '2', fill= '2'),stroke= 1.2,size =1.5)+
-  geom_ribbon(data =IC1, aes(x=d1,ymin = d4,ymax =d2,color = '0',linetype = '0', shape = '0', fill = '0'),stroke= NA,size =1.5, alpha = 0.1)+
   theme(panel.background = element_rect(fill = 'white'),
         panel.border = element_rect(color = "black", fill=NA, size = 1.5),
         axis.text = element_text(color = "black",size=18),
