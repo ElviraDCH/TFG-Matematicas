@@ -1,7 +1,7 @@
 library(tidyverse)
 library(paletteer)
 
-#Parámetro de escala fijo (lambda) y parámetro de forma variable (p)
+#Parámetro de escala fijo (lambda = 0.7) y parámetro de forma variable (p)
 t <- seq(0,3,0.1)
 lambda <- 0.7 
 
