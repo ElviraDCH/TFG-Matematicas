@@ -9,19 +9,19 @@ Grupo_1 <-veteran[veteran$trt =='2',]
 Grupo_1.surv<-Surv(Grupo_1$time, Grupo_1$status)
 
 #survfit calcula las curvas de supervivencia según el estimador indicado, en este caso el de Fleming-Harrington
-Grupo_1.km <-survfit(Grupo_1.surv ~ 1, data = Grupo_1, type ="fleming-harrington")
+Grupo_1.fh <-survfit(Grupo_1.surv ~ 1, data = Grupo_1, type ="fleming-harrington")
 
 #Resumen 
-summary(Grupo_1.km)
+summary(Grupo_1.fh)
 
 #Valores censurados
 censuras_tiempo <-c(25, 97,100, 123,182)
 censuras_FH <-c( 0.7531, 0.3711,0.3402,0.2912,0.2413)
 
 #DataFrames
-df <-data.frame(dx =Grupo_1.km$time, dy = Grupo_1.km$surv)
+df <-data.frame(dx =Grupo_1.fh$time, dy = Grupo_1.fh$surv)
 dc <-data.frame(dx1 =censuras_tiempo, dy1 =censuras_FH )
-IC1 <-data.frame(d1 = Grupo_1.km$time, d2 =Grupo_1.km$upper, d4 =Grupo_1.km$lower)
+IC1 <-data.frame(d1 = Grupo_1.fh$time, d2 =Grupo_1.fh$upper, d4 =Grupo_1.fh$lower)
 
 
 #Representación de la función de supervivencia estimada mediante el método de Fleming-Harrington       
