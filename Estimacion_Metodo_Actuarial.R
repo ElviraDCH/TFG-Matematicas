@@ -2,22 +2,22 @@ library(tidyverse)
 library(paletteer)
 library(ggplot2)
 
-#Estimación de la función de supervivencia mediante el método actuarial
+# Estimación de la función de supervivencia mediante el método actuarial
 S <- c(0.679, 0.515, 0.312, 0.211, 0.158, 0.088, 0.070, 0.035, 0.018, 0.018,
        0.018, 0,0)
 
-#División de la duración del estudio en intervalos de 50 dias 
+# División de la duración del estudio en intervalos de 50 dias 
 t <- seq(0,600,50)
 
-#Valores censurados
+# Valores censurados
 cx <-c(25, 97, 100, 123, 182)
 cy <-c(0.679,0.515,0.312,0.312,0.211)
 
-#DataFrames
+# DataFrames
 df <- data.frame(dx=t, dy=S)
 dp <-data.frame(dx1=cx,dy1 =cy)
 
-#Representación de la función de supervivencia estimada mediante el método actuarial 
+# Representación de la función de supervivencia estimada mediante el método actuarial 
 ggplot()+
   geom_step(data = df,aes(x=dx, y=dy, color='0',linetype = '0', shape= '0'),stroke=NA,size=1.2)+
   geom_point(data = dp,aes(x=dx1, y=dy1, color='1',linetype = '1', shape = '1'),stroke= 1.2,size =1.7)+
