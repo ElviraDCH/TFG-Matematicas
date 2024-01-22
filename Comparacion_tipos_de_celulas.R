@@ -22,7 +22,7 @@ Smallcell.km <- survfit(Smallcell.surv~ 1, data = Smallcell, type = "kaplan-meie
 Adeno.surv <- Surv(Adeno$time, Adeno$status)
 Adeno.km <- survfit(Adeno.surv~ 1, data = Adeno, type = "kaplan-meier")
 
-# Resúmenes de los datos de supervivencia de cada grupo 
+# Tablas resumen de la estimación de la función de supervivencia (S) para cada tipo de célula 
 summary(Large.km)
 summary(Smallcell.km)
 summary(Squamous.km)
