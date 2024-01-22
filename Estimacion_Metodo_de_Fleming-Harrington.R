@@ -11,7 +11,7 @@ Grupo_1.surv<-Surv(Grupo_1$time, Grupo_1$status)
 # survfit calcula las curvas de supervivencia según el estimador indicado, en este caso el de Fleming-Harrington
 Grupo_1.fh <-survfit(Grupo_1.surv ~ 1, data = Grupo_1, type ="fleming-harrington")
 
-# Resumen de los datos de supervivencia 
+# Tabla resumen de la estimación de la función de supervivencia (S) obtenida mediante el método de Fleming-Harrington
 summary(Grupo_1.fh)
 
 # Valores censurados
