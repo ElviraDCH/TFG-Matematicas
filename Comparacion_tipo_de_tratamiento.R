@@ -3,7 +3,7 @@ library(survival)
 library(KMsurv)
 library(paletteer)
 
-#Pacientes que recibieron el tratamiento est??ndar
+#Pacientes que recibieron el tratamiento estándar
 Grupo_1 <-veteran[veteran$trt!='2',] 
 
 #Pacientes que recibieron el tratamiento de quimioterapia 
@@ -21,7 +21,7 @@ Grupo2.km <- survfit(Grupo2.surv ~ 1, data = Grupo_2, type = "kaplan-meier")
 summary(Grupo1.km)
 summary(Grupo2.km)
 
-#Datos censurados del grupo 1-tratamiento est??ndar
+#Datos censurados del grupo 1-tratamiento estándar
 censuras_KM <-c(0.7536,0.5172,0.5020,0.3922,0.2124)
 censuras_tiempo <-c(25, 97,100, 123,182)
 
@@ -39,7 +39,7 @@ df2 <-data.frame(dx2 =Grupo2.km$time, dy2 = Grupo2.km$surv)
 dc2 <-data.frame(dx12 =censuras_tiempo2, dy12 =censuras_KM2 )
 IC2 <-data.frame(d12 = Grupo2.km$time, d22 =Grupo2.km$upper, d42 =Grupo2.km$lower)
 
-#Representaci??n de la estimaci??n de supervivencia para cada grupo de tratamiento 
+#Representación de la estimación de supervivencia para cada grupo de tratamiento 
 ggplot()+
   geom_step(data = df,aes(x=dx, y=dy, color='0',linetype = '0', shape= '0', fill = '0'),stroke=NA,size=1.1)+
   geom_step(data = df2,aes(x=dx2, y=dy2, color='1',linetype = '1', shape= '1', fill = '1'),stroke=NA,size=1.1)+
@@ -59,7 +59,7 @@ ggplot()+
         legend.title = element_blank(),   
         legend.spacing.y = unit(0.01, 'cm'),
         legend.spacing.x = unit(0.02, 'cm'))+
-  labs(x='Tiempo en d??as', y='Probabilidad de supervivencia')+
+  labs(x='Tiempo en días', y='Probabilidad de supervivencia')+
   scale_colour_manual(' ',values = c('0'='#BD263E','1'= '#166A2F','2' ='#A3123A', '3'='#68A768', '4'='black', '5'='#55AD89'),
                       labels = c("KM-Grupo 1","KM-Grupo 2","Intervalo de confianza-Grupo 1","Intervalo de confianza-Grupo 2","Observaciones censuradas-Grupo 1",
                                  "Observaciones censuradas-Grupo 2"))+
