@@ -17,7 +17,7 @@ Grupo1.km <-survfit(Grupo1.surv ~ 1, data = Grupo_1, type ="kaplan-meier")
 Grupo2.surv <- Surv(Grupo_2$time, Grupo_2$status) 
 Grupo2.km <- survfit(Grupo2.surv ~ 1, data = Grupo_2, type = "kaplan-meier")
 
-# Resumen datos de supervivencia para cada grupo 
+# Tablas resumen de la estimación de la función de supervivencia (S) para cada grupo de tratamiento 
 summary(Grupo1.km)
 summary(Grupo2.km)
 
