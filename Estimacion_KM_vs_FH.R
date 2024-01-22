@@ -9,7 +9,7 @@ Grupo1.surv <-Surv(Grupo_1$time,Grupo_1$status)
 Grupo1.km <-survfit(Grupo1.surv ~ 1, data = Grupo_1, type ="kaplan-meier")
 Grupo1.fh <-survfit(Grupo1.surv ~ 1, data = Grupo_1, type ="fleming-harrington")
 
-# Resúmenes de los datos de supervivencia 
+# Resúmenes de la estimación de la función de supervivencia (S) para cada estimador 
 summary(Grupo1.km)
 summary(Grupo1.fh)
 
