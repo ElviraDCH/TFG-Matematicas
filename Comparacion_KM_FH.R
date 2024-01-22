@@ -2,7 +2,7 @@ library(survival)
 library(KMsurv)
 library(paletteer)
 
-#Datos de los pacientes que han recibido el tratamiento est??ndar
+#Datos de los pacientes que han recibido el tratamiento estándar
 Grupo_1 <-veteran[veteran$trt!='2',] 
 
 Grupo1.surv <-Surv(Grupo_1$time,Grupo_1$status)
@@ -26,7 +26,7 @@ dc_fh<-data.frame(dx12 =censuras_tiempo, dy12 =censuras_FH )
 IC1_fh <-data.frame(d12 = Grupo1.fh$time, d22 =Grupo1.fh$upper, d42 =Grupo1.fh$lower)
 
 
-#Representacion de las funciones de supervivencia estimadas mediante el metodo de Kaplan-Meier y Fleming-Harrington
+#Representación de las funciones de supervivencia estimadas mediante el método de Kaplan-Meier y de Fleming-Harrington
 ggplot()+
   geom_step(data = df_km,aes(x=dx, y=dy, color='0',linetype = '0', shape= '0', fill = '0'),stroke=NA,size=1.1)+
   geom_step(data = df_fh,aes(x=dx2, y=dy2, color='1',linetype = '1', shape= '1',fill = '1'),stroke=NA,size=1.1)+
@@ -46,17 +46,17 @@ ggplot()+
         legend.title = element_blank(),   
         legend.spacing.y = unit(0.01, 'cm'),
         legend.spacing.x = unit(0.02, 'cm'))+
-  labs(x='Tiempo en d??as', y='Probabilidad de supervivencia')+  
+  labs(x='Tiempo en días', y='Probabilidad de supervivencia')+  
   scale_colour_manual(' ',values = c('0'='#BD263E','1' = '#6388B4FF', '2' = '#A3123A', '3' = '#78A8CE', '4' = 'black', '5' = '#1F74B1'),
-                      labels = c("Estimaci??n KM","Estimaci??n FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
+                      labels = c("Estimación KM","Estimación FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
                                  "Observaciones censuradas KM", "Observaciones censuradas FH"))+
   scale_linetype_manual(' ', values =c('0'='solid', '1'= 'solid', '2'=NA, '3'=NA, '4'= NA, '5'=NA),
-                        labels = c("Estimaci??n KM","Estimaci??n FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
+                        labels = c("Estimación KM","Estimación FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
                                    "Observaciones censuradas KM", "Observaciones censuradas FH"))+
   scale_shape_manual(' ', values = c('0'= NA, '1'= NA, '2'=NA, '3'= NA, '4'= 3, '5'= 3),
-                     labels = c("Estimaci??n KM","Estimaci??n FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
+                     labels = c("Estimación KM","Estimación FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
                                 "Observaciones censuradas KM", "Observaciones censuradas FH"))+
   scale_fill_manual(' ', values = c('0'='white', '1'= 'white', '2'= '#A3123A', '3'= '#78A8CE', '4'= 'white', '5'= 'white'),
-                    labels = c("Estimaci??n KM","Estimaci??n FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
+                    labels = c("Estimación KM","Estimación FH", "Intervalo de confianza KM", "Intervalo de confianza FH", 
                                "Observaciones censuradas KM", "Observaciones censuradas FH"))
  
