@@ -26,9 +26,9 @@ IC1 <-data.frame(d1 = Grupo_1.fh$time, d2 =Grupo_1.fh$upper, d4 =Grupo_1.fh$lowe
 
 #Representación de la función de supervivencia estimada mediante el método de Fleming-Harrington       
 ggplot()+
+  geom_step(data = df,aes(x=dx, y=dy, color='2',linetype = '2', shape= '2',fill = '2'),stroke=NA,size=1.1)+
   geom_ribbon(data =IC1, aes(x=d1,ymin = d4,ymax =d2,color = '0',linetype = '0', shape = '0', fill = '0'),stroke= NA,size =1.5, alpha = 0.1)+
   geom_point(data = dc,aes(x=dx1, y=dy1, color='1',linetype = '1', shape = '1', fill = '1'),stroke= 1.2,size =1.5)+
-  geom_step(data = df,aes(x=dx, y=dy, color='2',linetype = '2', shape= '2',fill = '2'),stroke=NA,size=1.1)+
   theme(panel.background = element_rect(fill = 'white'),
         panel.border = element_rect(color = "black", fill=NA, size = 1.5),
         axis.text = element_text(color = "black",size=18),
