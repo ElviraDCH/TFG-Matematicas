@@ -2,14 +2,14 @@ library(survival)
 library(KMsurv)
 library(paletteer)
 
-# Datos de los pscientes segun el tipo de celula cancerigena 
+# Datos de los pacientes según el tipo de célula cancerígena 
 Large <-veteran[veteran$celltype =='large',]
 Squamous<-veteran[veteran$celltype =='squamous',]
 Smallcell <-veteran[veteran$celltype =='smallcell',]
 Adeno <-veteran[veteran$celltype =='adeno',]
 
 
-#Objetos Surv y Survfit para cada tipo de c??lula cancerigena mediante el estimador de Kaplan-Meier
+# Objetos Surv y Survfit para cada tipo de célula cancerígena mediante el estimador de Kaplan-Meier
 Large.surv <- Surv(Large$time, Large$status)
 Large.km <- survfit(Large.surv~ 1, data = Large, type = "kaplan-meier")
 
@@ -22,13 +22,13 @@ Smallcell.km <- survfit(Smallcell.surv~ 1, data = Smallcell, type = "kaplan-meie
 Adeno.surv <- Surv(Adeno$time, Adeno$status)
 Adeno.km <- survfit(Adeno.surv~ 1, data = Adeno, type = "kaplan-meier")
 
-#Resumenes de los datos de suervivencia de cada grupo 
+# Resumenes de los datos de supervivencia de cada grupo 
 summary(Large.km)
 summary(Smallcell.km)
 summary(Squamous.km)
 summary(Adeno.km)
 
-#Tiempos censurados para cada tipo de c??lula 
+# Tiempos censurados para cada tipo de célula 
 tiempo_Large <-182
 censuras_Large <-0.3704
 
@@ -41,7 +41,7 @@ censuras_Smallcell <-c(0.2708,0.2257,0.1755)
 tiempo_Adeno <- 83
 censuras_Adeno <- 0.3704
 
-#DataFrames
+# DataFrames
 dfLarge <- data.frame(dx = Large.km$time, dy = Large.km$surv)
 dfSquamous <- data.frame(dx1 = Squamous.km$time, dy1 = Squamous.km$surv)
 dfSmallcell <- data.frame(dx2 = Smallcell.km$time, dy2 = Smallcell.km$surv)
@@ -52,7 +52,7 @@ CensuraSmallcell<-data.frame(dx12 =tiempo_Smallcell, dy22 =censuras_Smallcell)
 CensuraAdeno<-data.frame(dx13 =tiempo_Adeno, dy33 =censuras_Adeno)
 CensuraSquamous<-data.frame(dx14 =tiempo_Squamous, dy44 =censuras_Squamous)
 
-#Representacion de la estimacion de supervivencia para cada tipo de celula cancerigena con el m??todo de Kaplan-Meier
+# Representación de la estimación de supervivencia para cada tipo de célula cancerígena determinada mediante el método de Kaplan-Meier
 ggplot()+
   geom_step(data = dfLarge,aes(x=dx, y=dy, color='0',linetype = '0', shape = '0'),stroke=NA,size=1.1)+
   geom_step(data = dfSquamous,aes(x=dx1, y=dy1, color='3',linetype = '1', shape = '1'),stroke=NA,size=1.1)+
@@ -74,7 +74,7 @@ ggplot()+
         legend.title = element_blank(),   
         legend.spacing.y = unit(0.01, 'cm'),
         legend.spacing.x = unit(0.02, 'cm'))+
-  labs(x='Tiempo en d??as', y='Probabilidad de supervivencia')+
+  labs(x='Tiempo en días', y='Probabilidad de supervivencia')+
   scale_colour_manual(' ',values = c('0' = '#BD263E','1' ='#FFAE34','2' ='#6388B4FF', '3'='#55AD89', '4'='#D83842', '5'='#F3A546', '6'='#1170AA', '7'='#26897E'),
                       labels = c("Large","Adeno","Smallcell","Squamous", "Observaciones censuradas-Large", "Observaciones censuradas-Adeno",
                                  "Observaciones censuradas-Smallcell", "Observaciones censuradas-Squamous"))+
