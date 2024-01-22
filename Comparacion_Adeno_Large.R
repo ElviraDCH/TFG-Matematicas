@@ -2,23 +2,23 @@ library(survival)
 library(KMsurv)
 library(paletteer)
 
-# Datos de los pacientes con c??lulas cancer??genas tipo Large y Adeno
+# Datos de los pacientes con células cancerígenas tipo Large y Adeno
 Large <-veteran[veteran$celltype =='large',]
 Adeno <-veteran[veteran$celltype =='adeno',]
 
 
-# Objeto Surv y funcion survfit para cada tipo de celula 
+# Objeto Surv y función survfit para cada tipo de célula 
 Large.surv <- Surv(Large$time, Large$status)
 Large.km <- survfit(Large.surv~ 1, data = Large, type = "kaplan-meier")
 
 Adeno.surv <- Surv(Adeno$time, Adeno$status)
 Adeno.km <- survfit(Adeno.surv~ 1, data = Adeno, type = "kaplan-meier")
 
-# Tabla resumen de la estimacion de la funcion de supervivencia para cada tipo de celula 
+# Tabla resumen de la estimación de la función de supervivencia para cada tipo de célula 
 summary(Large.km)
 summary(Adeno.km)
 
-# Datos censurados para cada tipo de celula 
+# Datos censurados para cada tipo de célula 
 tiempo_Adeno <- 83
 censuras_Adeno <- 0.3704
 
@@ -34,7 +34,7 @@ dfAdeno <- data.frame(dx3 = Adeno.km$time, dy3 = Adeno.km$surv)
 ICAdeno <-data.frame(d3 = Adeno.km$time, d32 = Adeno.km$upper, d33 = Adeno.km$lower)
 CensuraAdeno <-data.frame(dx31 =tiempo_Adeno, dy31 =censuras_Adeno)
 
-# Representacion grafica de las estimaciones de la funcion de supervivencia para el tipo de ceclula de Adeno y Large 
+# Representación gráfica de las estimaciones de la función de supervivencia para el tipo de célula Adeno y Large 
 ggplot()+
   geom_step(data = dfLarge,aes(x=dx, y=dy, color='0',linetype = '0', shape= '0', fill = '0'),stroke=NA,size=1.1)+
   geom_step(data = dfAdeno,aes(x=dx3, y=dy3, color='1',linetype = '1', shape= '1', fill = '1'),stroke=NA,size=1.1)+
@@ -54,7 +54,7 @@ ggplot()+
         legend.title = element_blank(),   
         legend.spacing.y = unit(0.01, 'cm'),
         legend.spacing.x = unit(0.02, 'cm'))+ 
-  labs(x='Tiempo en d??as', y='Probabilidad de supervivencia')+
+  labs(x='Tiempo en días', y='Probabilidad de supervivencia')+
   scale_colour_manual(' ',values = c('0'='#BD263E','1'='#FFAE34','2' ='#D83842', '3'='#F3A546', '4'='black', '5'='#CA5621'),
                       labels = c("Large","Adeno", "Intervalo de confianza-Large","Intervalo de confianza-Adeno", "Observaciones censuradas-Large",
                                  "Observaciones censuradas-Adeno"))+
@@ -68,9 +68,9 @@ ggplot()+
                     labels = c("Large","Adeno", "Intervalo de confianza-Large","Intervalo de confianza-Adeno", "Observaciones censuradas-Large",
                                "Observaciones censuradas-Adeno"))
 
-# DataFrame conjunto de ambas celulas 
+# DataFrame conjunto de ambas células 
 juntos <-merge(Large, Adeno, all = TRUE)
 
-# Test Log-Rank para los tipos de c??lulas cancer??genas Adeno y Large 
+# Test Log-Rank para los tipos de células cancerígenas Adeno y Large 
 p_valor <-survdiff(Surv(time, status) ~ celltype,data=juntos)
 p_valor
