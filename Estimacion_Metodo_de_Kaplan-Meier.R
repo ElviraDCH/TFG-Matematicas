@@ -6,25 +6,25 @@ library(paletteer)
 # Datos de los pacientes de veteran que han recibido el tratamiento estándar
 Grupo_1 <-veteran[veteran$trt!='2',] 
 
-#Surv combina información sobre el tiempo y la censura de los pacientes
+# Surv combina información sobre el tiempo y la censura de los pacientes
 Grupo1.surv <-Surv(Grupo_1$time,Grupo_1$status)
 
-#survfit calcula las curvas de supervivencia según el estimador elegido, en este caso el de Kaplan-Meier
+# survfit calcula las curvas de supervivencia según el estimador elegido, en este caso el de Kaplan-Meier
 Grupo1.km <-survfit(Grupo1.surv ~ 1, data = Grupo_1, type ="kaplan-meier")
 
-#Tabla resumen de la estimación de la función de supervivencia (S)
+# Tabla resumen de la estimación de la función de supervivencia (S)
 summary(Grupo1.km)
 
-#Valores de los tiempos censurados
+# Valores de los tiempos censurados
 censuras_KM <-c(0.7536,0.5172,0.5020,0.3922,0.2124)
 censuras_tiempo <-c(25, 97,100, 123,182)
 
-#DataFrames
+# DataFrames
 df <-data.frame(dx =Grupo1.km$time, dy = Grupo1.km$surv)
 dc <-data.frame(dx1 =censuras_tiempo, dy1 =censuras_KM )
 IC1 <-data.frame(d1 = Grupo1.km$time, d2 =Grupo1.km$upper, d4 =Grupo1.km$lower)
 
-#Gráfica de la función de supervivencia mediante el método de Kaplan-Meier
+# Gráfica de la función de supervivencia mediante el método de Kaplan-Meier
 ggplot()+
   geom_ribbon(data =IC1, aes(x=d1,ymin = d4,ymax =d2,color = '0',linetype = '0', shape = '0', fill = '0'),stroke= NA,size =1.5, alpha = 0.1)+
   geom_step(data = df,aes(x=dx, y=dy, color='1',linetype = '1', shape= '1', fill = '1'),stroke=NA,size=1.1)+
