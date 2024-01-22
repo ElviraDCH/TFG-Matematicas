@@ -5,26 +5,26 @@ library(paletteer)
 # Datos de los pacientes que recibieron el tratamiento estándar
 Grupo_1 <-veteran[veteran$trt =='2',] 
 
-#Surv combina información sobre el tiempo y la censura de los pacientes
+# Surv combina información sobre el tiempo y la censura de los pacientes
 Grupo_1.surv<-Surv(Grupo_1$time, Grupo_1$status)
 
-#survfit calcula las curvas de supervivencia según el estimador indicado, en este caso el de Fleming-Harrington
+# survfit calcula las curvas de supervivencia según el estimador indicado, en este caso el de Fleming-Harrington
 Grupo_1.fh <-survfit(Grupo_1.surv ~ 1, data = Grupo_1, type ="fleming-harrington")
 
-#Resumen 
+# Resumen de los datos de supervivencia 
 summary(Grupo_1.fh)
 
-#Valores censurados
+# Valores censurados
 censuras_tiempo <-c(25, 97,100, 123,182)
 censuras_FH <-c( 0.7531, 0.3711,0.3402,0.2912,0.2413)
 
-#DataFrames
+# DataFrames
 df <-data.frame(dx =Grupo_1.fh$time, dy = Grupo_1.fh$surv)
 dc <-data.frame(dx1 =censuras_tiempo, dy1 =censuras_FH )
 IC1 <-data.frame(d1 = Grupo_1.fh$time, d2 =Grupo_1.fh$upper, d4 =Grupo_1.fh$lower)
 
 
-#Representación de la función de supervivencia estimada mediante el método de Fleming-Harrington       
+# Representación de la función de supervivencia estimada mediante el método de Fleming-Harrington       
 ggplot()+
   geom_step(data = df,aes(x=dx, y=dy, color='2',linetype = '2', shape= '2',fill = '2'),stroke=NA,size=1.1)+
   geom_ribbon(data =IC1, aes(x=d1,ymin = d4,ymax =d2,color = '0',linetype = '0', shape = '0', fill = '0'),stroke= NA,size =1.5, alpha = 0.1)+
